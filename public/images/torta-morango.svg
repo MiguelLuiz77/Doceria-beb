@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" fill="none">
+  <defs><linearGradient id="bg" x2=".8" y2="1"><stop stop-color="#f5e7dc"/><stop offset="1" stop-color="#ead0c8"/></linearGradient><linearGradient id="cream" x1=".1" y1="0" x2=".9" y2="1"><stop stop-color="#fff8e9"/><stop offset="1" stop-color="#e5c7a9"/></linearGradient><linearGradient id="berry" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e47976"/><stop offset="1" stop-color="#8d2735"/></linearGradient><linearGradient id="crust" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d9aa76"/><stop offset="1" stop-color="#8c5335"/></linearGradient></defs>
+  <path fill="url(#bg)" d="M0 0h600v700H0z"/><circle cx="105" cy="105" r="94" fill="#fff7ec" opacity=".35"/><path d="M0 537c142-42 320 30 600-14v177H0z" fill="#d5bba9" opacity=".23"/>
+  <ellipse cx="302" cy="526" rx="204" ry="42" fill="#92705b" opacity=".15"/><ellipse cx="300" cy="514" rx="217" ry="54" fill="#fffaf2"/><ellipse cx="300" cy="504" rx="185" ry="37" fill="#e7d7c4"/>
+  <path d="M162 394c19-115 88-178 138-178s119 63 138 178H162Z" fill="url(#crust)"/><path d="M174 387c22-101 79-148 126-148s104 47 126 148H174Z" fill="url(#cream)"/><path d="M188 371c24-48 65-73 112-73 45 0 86 25 112 73l15 19H173l15-19Z" fill="#fff7e7"/>
+  <path d="M207 361c18-44 42-67 68-66 23 1 38 26 25 43-13 17-41 13-48 29M305 353c10-45 37-70 61-63 20 6 21 31 3 43-16 11-35 8-45 24" fill="url(#berry)"/>
+  <path d="M273 296c-6-12-2-22 6-25 7-2 13 5 11 14 12-11 24-7 23 2-1 9-14 16-29 14-4-1-8-2-11-5ZM360 285c-2-12 4-20 12-20 7 0 11 8 7 16 14-8 24-2 21 7-3 8-17 12-31 7-3-1-7-4-9-10Z" fill="#71805a"/>
+  <circle cx="209" cy="327" r="30" fill="url(#berry)"/><circle cx="383" cy="342" r="28" fill="url(#berry)"/><circle cx="294" cy="275" r="31" fill="url(#berry)"/>
+  <g fill="#f8d1ad"><ellipse cx="204" cy="320" rx="3" ry="5"/><ellipse cx="217" cy="332" rx="3" ry="5"/><ellipse cx="292" cy="267" rx="3" ry="5"/><ellipse cx="301" cy="281" rx="3" ry="5"/><ellipse cx="381" cy="336" rx="3" ry="5"/></g>
+  <path d="M218 410h164" stroke="#f4d8ad" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+</svg>
