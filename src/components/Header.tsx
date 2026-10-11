@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Icon } from './Icon';
+import { businessConfig } from '../config/business';
 
 const links = [
   ['Sobre', '#sobre'],
@@ -32,9 +33,9 @@ export function Header({ count, onCart }: { count: number; onCart: () => void })
   return (
     <header className={`site-header ${scrolled ? 'site-header--scrolled' : ''}`}>
       <div className="site-header__inner">
-        <a className="brand" href="#inicio" aria-label="Doceria B&B — início" onClick={closeMenu}>
-          <img src="/images/logo-bb.webp" alt="" width="52" height="52" />
-          <span className="brand__wordmark"><strong>Doceria B&amp;B</strong><small>feito com carinho</small></span>
+        <a className="brand" href="#inicio" aria-label={`${businessConfig.name} — início`} onClick={closeMenu}>
+          <img src="/images/logo-mariah.webp" alt="" width="52" height="52" />
+          <span className="brand__wordmark"><strong>{businessConfig.name}</strong><small>feito com carinho</small></span>
         </a>
 
         <nav id="mobile-menu" className={`site-nav ${menuOpen ? 'site-nav--open' : ''}`} aria-label="Navegação principal">

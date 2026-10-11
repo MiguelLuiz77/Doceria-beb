@@ -1,5 +1,5 @@
 export const businessConfig = {
-  name: 'Doceria B&B',
+  name: 'Mariah! Doce Bar',
   whatsappNumber: '', // Configure com o código do país e DDD, sem espaços ou símbolos.
   instagramUrl: '',
   email: '',

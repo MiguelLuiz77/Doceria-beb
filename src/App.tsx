@@ -25,26 +25,36 @@ const reviews = [
 
 function Hero() {
   const [videoFailed, setVideoFailed] = useState(false);
+  const [motionReduced, setMotionReduced] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
-  return <section className="hero" id="inicio" aria-label="Apresentação da Doceria B&B">
+  useEffect(() => {
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const updateMotionPreference = (event: MediaQueryListEvent) => setMotionReduced(event.matches);
+    preference.addEventListener('change', updateMotionPreference);
+    return () => preference.removeEventListener('change', updateMotionPreference);
+  }, []);
+
+  return <section className="hero" id="inicio" aria-label={`Apresentação da ${businessConfig.name}`}>
     <div className="hero-stage">
-      {!videoFailed && <video
+      {!videoFailed && !motionReduced && <video
         className="hero-video"
-        src="/videos/hero-doceria-bb.mp4"
-        poster="/images/hero-poster.jpg"
+        src="/videos/mariah-hero.mp4"
+        poster="/images/mariah-hero-poster.jpg"
+        width={880}
+        height={474}
         autoPlay
         loop
         muted
         playsInline
-        preload="auto"
-        aria-label="Confeiteira decorando um bolo"
+        preload="metadata"
+        aria-label="Animação da confeitaria Mariah! Doce Bar"
         onError={() => setVideoFailed(true)}
       />}
-      {videoFailed && <img className="hero-video hero-video--fallback" src="/images/hero-poster.jpg" alt="Confeiteira decorando um bolo" />}
+      {(videoFailed || motionReduced) && <img className="hero-video hero-video--fallback" src="/images/mariah-hero-poster.jpg" alt="Mariah! Doce Bar — confeitaria artesanal" />}
       <div className="hero-shade" />
       <div className="hero-copy-wrap">
         <div className="hero-copy">
-          <p className="eyebrow eyebrow--light"><Icon name="spark" /> DOCERIA B&amp;B <span>•</span> FEITO COM CARINHO</p>
+          <p className="eyebrow eyebrow--light"><Icon name="spark" /> MARIAH! DOCE BAR <span>•</span> FEITO COM CARINHO</p>
           <h1>Momentos especiais<br /><em>começam com um doce.</em></h1>
           <p className="hero-copy__description">Criações artesanais, feitas para transformar pequenos encontros em lembranças que ficam.</p>
           <div className="hero-actions">
@@ -78,7 +88,7 @@ function About() {
       <Reveal className="about__copy" delay={100}>
         <p className="eyebrow">A essência B&amp;B</p>
         <h2>Doçura feita para <em>ficar na memória.</em></h2>
-        <p>Na Doceria B&amp;B, cada criação nasce do carinho pelas pequenas coisas: uma receita bem cuidada, uma textura no ponto e um acabamento feito com calma.</p>
+        <p>Na {businessConfig.name}, cada criação nasce do carinho pelas pequenas coisas: uma receita bem cuidada, uma textura no ponto e um acabamento feito com calma.</p>
         <p>Mais do que um doce, queremos estar presente naquele instante que merece ser celebrado — à mesa, em boa companhia, do seu jeito.</p>
         <a className="text-link" href="#processo">Conheça nosso cuidado <Icon name="arrow" /></a>
         <div className="about__signature"><span>B&amp;B</span><i>doces momentos</i></div>
@@ -153,7 +163,7 @@ function Footer() {
     <section className="final-cta" id="contato">
       <div className="final-cta__texture" aria-hidden="true" />
       <div className="container final-cta__inner">
-        <p className="eyebrow eyebrow--light">Um convite da B&amp;B</p>
+        <p className="eyebrow eyebrow--light">Um convite da Mariah!</p>
         <h2>Seu próximo momento especial <em>começa aqui.</em></h2>
         <p>Conte para nós o que você está celebrando. A gente ajuda a deixar esse instante ainda mais doce.</p>
         <div className="final-cta__actions"><a className="button button--rose" href={whatsappLink(generalOrderMessage)} target="_blank" rel="noreferrer">Conversar pelo WhatsApp <Icon name="arrow" /></a><a className="button button--outline-light" href="#produtos">Ver o cardápio</a></div>
@@ -163,11 +173,11 @@ function Footer() {
     <footer className="site-footer">
       <div className="container">
         <div className="site-footer__main">
-          <div className="site-footer__brand"><a className="brand brand--footer" href="#inicio"><img src="/images/logo-bb.webp" alt="" width="54" height="54" /><span className="brand__wordmark"><strong>Doceria B&amp;B</strong><small>feito com carinho</small></span></a><p>Doces feitos à mão para acompanhar os momentos que importam.</p></div>
+          <div className="site-footer__brand"><a className="brand brand--footer" href="#inicio"><img src="/images/logo-mariah.webp" alt="" width="54" height="54" /><span className="brand__wordmark"><strong>{businessConfig.name}</strong><small>feito com carinho</small></span></a><p>Doces feitos à mão para acompanhar os momentos que importam.</p></div>
           <div className="site-footer__links"><p className="eyebrow">Explore</p><a href="#sobre">Nossa essência</a><a href="#produtos">Cardápio</a><a href="#processo">Nosso cuidado</a><a href="#galeria">Galeria</a></div>
           <div className="site-footer__links"><p className="eyebrow">Fale com a gente</p><a href="#contato">Fazer um pedido</a>{businessConfig.email && <a href={`mailto:${businessConfig.email}`}>{businessConfig.email}</a>}{businessConfig.address && <span>{businessConfig.address}</span>}{businessConfig.instagramUrl && <a href={businessConfig.instagramUrl} target="_blank" rel="noreferrer">Instagram <Icon name="instagram" /></a>}{!hasContact && <span>Atualize os canais de contato<br />em src/config/business.ts.</span>}</div>
         </div>
-        <div className="site-footer__bottom"><span>© {new Date().getFullYear()} Doceria B&amp;B</span><span>Feito com carinho, em cada detalhe.</span><a href="#inicio">Voltar ao topo ↑</a></div>
+        <div className="site-footer__bottom"><span>© {new Date().getFullYear()} {businessConfig.name}</span><span>Feito com carinho, em cada detalhe.</span><a href="#inicio">Voltar ao topo ↑</a></div>
       </div>
     </footer>
   </>;
@@ -196,7 +206,7 @@ export default function App() {
       <ProductsSection onAdd={addProduct} onFeaturedAdd={addProduct} />
       <Process />
       <section className="gallery-section section-pad" id="galeria"><div className="container">
-        <Reveal><div className="gallery-heading"><SectionIntro label="Um pouco da nossa mesa" title={<>Feito à mão. <em>Feito para sentir.</em></>} description="Texturas, sabores e pequenos detalhes das criações B&B." /><a className="text-link gallery-heading__link" href="#produtos">Ver cardápio <Icon name="arrow" /></a></div></Reveal>
+        <Reveal><div className="gallery-heading"><SectionIntro label="Um pouco da nossa mesa" title={<>Feito à mão. <em>Feito para sentir.</em></>} description={`Texturas, sabores e pequenos detalhes das criações ${businessConfig.name}.`} /><a className="text-link gallery-heading__link" href="#produtos">Ver cardápio <Icon name="arrow" /></a></div></Reveal>
         <Reveal><Gallery /></Reveal>
       </div></section>
       <Testimonials />
